@@ -1,1 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Nuestro Amor ❤️</title>
+
+<style>
+body{
+  margin:0;
+  background:#ffe6ea;
+  font-family:sans-serif;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* Árbol */
+.arbol{
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.tronco{
+  width:30px;
+  height:150px;
+  background:#8b4513;
+  margin:auto;
+}
+
+.copa{
+  position:relative;
+  width:300px;
+  height:200px;
+}
+
+/* Corazones */
+.corazon{
+  position:absolute;
+  color:red;
+  animation:latido 1.5s infinite alternate;
+}
+
+@keyframes latido{
+  from{transform:scale(1);}
+  to{transform:scale(1.3);}
+}
+
+/* Carta */
+.carta{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 0 20px rgba(0,0,0,.2);
+  cursor:pointer;
+}
+
+.abierta{
+  background:#fff0f5;
+}
+
+/* contador */
+#contador{
+  position:absolute;
+  top:20px;
+  width:100%;
+  font-size:20px;
+  color:#c2185b;
+}
+</style>
+</head>
+
+<body>
+
+<div id="contador"></div>
+
+<!-- Carta -->
+<div class="carta" onclick="abrirCarta()" id="carta">
+💌 Haz clic para abrir la carta
+</div>
+
+<!-- Árbol -->
+<div class="arbol">
+<div class="copa" id="copa"></div>
+<div class="tronco"></div>
+</div>
+
+<script>
+
+/* CONTADOR AMOR */
+const inicio = new Date("2023-05-01 00:00:00");
+
+function actualizar(){
+  const ahora = new Date();
+  const diff = ahora - inicio;
+
+  const dias = Math.floor(diff/1000/60/60/24);
+  const horas = Math.floor(diff/1000/60/60)%24;
+  const minutos = Math.floor(diff/1000/60)%60;
+  const segundos = Math.floor(diff/1000)%60;
+
+  document.getElementById("contador").innerHTML =
+  `❤️ Nuestro amor comenzó hace:
+  ${dias} días ${horas} horas
+  ${minutos} min ${segundos} seg ❤️`;
+}
+
+setInterval(actualizar,1000);
+
+
+/* ÁRBOL CORAZONES */
+const copa = document.getElementById("copa");
+
+for(let i=0;i<40;i++){
+  const corazon=document.createElement("div");
+  corazon.className="corazon";
+  corazon.innerHTML="❤️";
+
+  corazon.style.left=Math.random()*280+"px";
+  corazon.style.top=Math.random()*180+"px";
+  corazon.style.fontSize=(Math.random()*20+15)+"px";
+
+  copa.appendChild(corazon);
+}
+
+
+/* CARTA INTERACTIVA */
+let abierta=false;
+
+function abrirCarta(){
+  const carta=document.getElementById("carta");
+
+  if(!abierta){
+    carta.classList.add("abierta");
+    carta.innerHTML=`
+    ❤️ Para el amor de mi vida ❤️<br><br>
+    Si pudiera elegir un lugar seguro,<br>
+    siempre sería a tu lado.<br><br>
+    Gracias por cada momento juntos 💕<br>
+    Te amo muchísimo 😘<br><br>
+    (Haz clic para cerrar)
+    `;
+    abierta=true;
+  }else{
+    carta.innerHTML="💌 Haz clic para abrir la carta";
+    carta.classList.remove("abierta");
+    abierta=false;
+  }
+}
+
+</script>
+</body>
+</html>
 
